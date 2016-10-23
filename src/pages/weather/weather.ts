@@ -12,6 +12,8 @@ export class WeatherPage {
   city = "Boston";
   state = "MA";
   weather = {};
+  searchStr;
+  results;
   constructor(public navCtrl: NavController,
               private _weatherService: WeatherService) {
 
@@ -23,5 +25,12 @@ export class WeatherPage {
          this.weather = weather.current_observation;
          console.log(this.weather);
        });
+  }
+
+  getQuery(){
+    this._weatherService.searchCities(this.searchStr)
+      .subscribe(res => {
+        this.results = res.RESULTS;
+      });
   }
 }
